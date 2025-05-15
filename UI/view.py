@@ -13,7 +13,6 @@ class View(ft.UserControl):
         self._controller = None
         # graphical elements
         self._title = None
-
         self._txt_result = None
 
     def load_interface(self):
@@ -21,12 +20,24 @@ class View(ft.UserControl):
         self._title = ft.Text("Country Borders", color="blue", size=24)
         self._page.controls.append(self._title)
 
-        #ROW with controls
+        # ROW with controls
         self._txtAnno = ft.TextField(label="Anno")
         self._btnCalcola = ft.ElevatedButton(text="Calcola Confini", on_click=self._controller.handleCalcola)
+
+        # ✅ Dropdown corretto
+        self._DDstato = ft.Dropdown(label="Seleziona Stato")
+        self._btnStato = ft.ElevatedButton(
+            text="Calcola componente connessa",
+            on_click=self._controller.handleCalcolaComponenteConnessa
+        )
+
         row1 = ft.Row([self._txtAnno, self._btnCalcola], alignment=ft.MainAxisAlignment.CENTER)
+        row2 = ft.Row([self._DDstato, self._btnStato], alignment=ft.MainAxisAlignment.CENTER)
+
         self._page.controls.append(row1)
-        # List View where the reply is printed
+        self._page.controls.append(row2)
+
+        # List View dove stampare i risultati
         self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
         self._page.controls.append(self._txt_result)
         self._page.update()
